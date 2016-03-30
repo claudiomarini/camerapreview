@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="bottom"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/alltext">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iconameteo"
+                android:src="@drawable/meteo1"
+                android:layout_marginLeft="60px"
+                android:layout_gravity="left"
+                 />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_testo"
+            android:text="ROMA"
+            android:textSize="50dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="60px"
+            android:layout_marginBottom="0dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Parzialmente Coperto"
+            android:layout_gravity="left"
+            android:layout_marginLeft="60px"
+            android:layout_marginBottom="0dp"
+            android:id="@+id/previsione" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="16°"
+            android:layout_gravity="left"
+            android:textSize="50dp"
+            android:layout_marginLeft="60px"
+            android:layout_marginBottom="0dp"
+            android:id="@+id/tmax" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="4°"
+            android:layout_gravity="left"
+            android:textSize="25dp"
+            android:layout_marginLeft="60px"
+            android:layout_marginBottom="0dp"
+            android:id="@+id/tmin" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/sm24"
+            android:src="@drawable/sm24"
+            android:layout_gravity="left"
+            android:layout_marginLeft="60px" />
+
+    </LinearLayout>
+
+
+    <ImageButton
+        android:id="@+id/flipcamera"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:text="Flip Camera"
+        android:layout_gravity="right|top"
+        android:layout_margin="10px"
+        android:background="@drawable/flipcamera" />
+    <ImageButton
+        android:id="@+id/takepicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take Picture"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10px"
+        android:src="@drawable/take" />
+
+
+
+</LinearLayout>

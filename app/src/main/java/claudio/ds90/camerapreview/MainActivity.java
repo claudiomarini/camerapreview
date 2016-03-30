@@ -8,10 +8,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
-import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -25,19 +25,19 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity implements  SurfaceHolder.Callback{
+public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
     Camera camera;
     SurfaceView surfaceView;
     SurfaceHolder surfaceHolder;
-    boolean previewing=false;
-    LayoutInflater controlInflater=null;
+    boolean previewing = false;
+    LayoutInflater controlInflater = null;
 
-    int currentid=Camera.CameraInfo.CAMERA_FACING_FRONT;
-
+    int currentid = Camera.CameraInfo.CAMERA_FACING_FRONT;
 
 
     @Override
@@ -49,10 +49,10 @@ public class MainActivity extends AppCompatActivity implements  SurfaceHolder.Ca
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         getWindow().setFormat(PixelFormat.UNKNOWN);
-        surfaceView = (SurfaceView)findViewById(R.id.camerapreview);
+        surfaceView = (SurfaceView) findViewById(R.id.camerapreview);
         surfaceView.setDrawingCacheEnabled(true);
         surfaceView.setWillNotDraw(false);
-        surfaceHolder=surfaceView.getHolder();
+        surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
 
         controlInflater = LayoutInflater.from(getApplicationContext());
@@ -62,33 +62,32 @@ public class MainActivity extends AppCompatActivity implements  SurfaceHolder.Ca
         this.addContentView(viewControl, layoutParamsControl);
 
 
-        ImageButton flip = (ImageButton)findViewById(R.id.flipcamera);
+        ImageButton flip = (ImageButton) findViewById(R.id.flipcamera);
         assert flip != null;
         flip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(previewing){
-                    Log.i("EEE","in previe e la stoppo");
+                if (previewing) {
+                    Log.i("EEE", "in previe e la stoppo");
                     camera.stopPreview();
                 }
 
                 camera.release();
 
-                if(currentid==Camera.CameraInfo.CAMERA_FACING_FRONT){
-                    Log.i("EEE","stava in front e la giro");
+                if (currentid == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+                    Log.i("EEE", "stava in front e la giro");
 
-                    currentid=Camera.CameraInfo.CAMERA_FACING_BACK;
+                    currentid = Camera.CameraInfo.CAMERA_FACING_BACK;
+                    camera = Camera.open(currentid);
+                    camera.setDisplayOrientation(90);
+                } else {
+                    Log.i("EEE", "stava in back e la giro");
+
+                    currentid = Camera.CameraInfo.CAMERA_FACING_FRONT;
                     camera = Camera.open(currentid);
                     camera.setDisplayOrientation(90);
                 }
-                else{
-                    Log.i("EEE","stava in back e la giro");
-
-                    currentid=Camera.CameraInfo.CAMERA_FACING_FRONT;
-                    camera = Camera.open(currentid);
-                    camera.setDisplayOrientation(90);
-                }
-                Log.i("EEE","riparte");
+                Log.i("EEE", "riparte");
                 try {
                     camera.setPreviewDisplay(surfaceHolder);
                 } catch (IOException e) {
@@ -100,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements  SurfaceHolder.Ca
         });
 
 
-        ImageButton take= (ImageButton)findViewById(R.id.takepicture);
+        ImageButton take = (ImageButton) findViewById(R.id.takepicture);
         assert take != null;
         take.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,22 +112,20 @@ public class MainActivity extends AppCompatActivity implements  SurfaceHolder.Ca
                         Bitmap b = BitmapFactory.decodeByteArray(data, 0, data.length);
                         Bitmap mutableBitmap = b.copy(Bitmap.Config.ARGB_8888, true);
                         Matrix x = new Matrix();
-                        if(currentid== Camera.CameraInfo.CAMERA_FACING_FRONT){
+                        if (currentid == Camera.CameraInfo.CAMERA_FACING_FRONT) {
                             x.postRotate(-90);
-                        }
-                        else{
+                        } else {
                             x.postRotate(90);
                         }
-                        Bitmap dausare= Bitmap.createBitmap(mutableBitmap,0,0,mutableBitmap.getWidth(),mutableBitmap.getHeight(),x,true);
+                        Bitmap dausare = Bitmap.createBitmap(mutableBitmap, 0, 0, mutableBitmap.getWidth(), mutableBitmap.getHeight(), x, true);
 
 
-
-                        LinearLayout lin = (LinearLayout)findViewById(R.id.alltext);
+                        LinearLayout lin = (LinearLayout) findViewById(R.id.alltext);
 
                         //TextView testo = (TextView)findViewById(R.id.tv_testo);
                         Bitmap testB;
                         //testB=Bitmap.createBitmap(testo.getWidth(), testo.getHeight(), Bitmap.Config.ARGB_8888);
-                        testB=Bitmap.createBitmap(lin.getWidth(), lin.getHeight(), Bitmap.Config.ARGB_8888);
+                        testB = Bitmap.createBitmap(lin.getWidth(), lin.getHeight(), Bitmap.Config.ARGB_8888);
                         Canvas c = new Canvas(testB);
                         //testo.draw(c);
                         lin.draw(c);
@@ -144,44 +141,42 @@ public class MainActivity extends AppCompatActivity implements  SurfaceHolder.Ca
                         Rect r = drawable2.getBounds();
                         Bitmap bitmap2 = drawable2.getBitmap();
 
-                        Bitmap res = overlay(dausare, bitmap2,lin.getX(),lin.getY() /*testo.getX(),testo.getY()*/);
+                        Bitmap res = overlay(dausare, bitmap2, lin.getX(), lin.getY() /*testo.getX(),testo.getY()*/);
 
 
                         try {
-                            FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory().toString()+"/kakakakaka.png");
+                            FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory().toString() + "/kakakakaka.png");
                             res.compress(Bitmap.CompressFormat.PNG, 100, fos);
                             fos.flush();
                             fos.close();
 
-                            Intent i = new Intent(getApplicationContext(),ShareActivity.class);
-                            i.putExtra("shareImg",Environment.getExternalStorageDirectory().toString()+"/kakakakaka.png");
+                            Intent i = new Intent(getApplicationContext(), ShareActivity.class);
+                            i.putExtra("shareImg", Environment.getExternalStorageDirectory().toString() + "/kakakakaka.png");
                             startActivity(i);
 
 
-                        }catch (IOException e) {
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
                 };
 
-                camera.takePicture(null,null,mPictureCallback);
-                previewing=false;
+                camera.takePicture(null, null, mPictureCallback);
+                previewing = false;
             }
         });
 
     }
 
 
-
-    private void takePicture(){
-
+    private void takePicture() {
 
 
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        Log.i("EEE","SurfaceCreata");
+        Log.i("EEE", "SurfaceCreata");
         camera = Camera.open(currentid);
         camera.setDisplayOrientation(90);
         Camera.Parameters params = camera.getParameters();
@@ -195,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements  SurfaceHolder.Ca
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        Log.i("EEE","SurfaceCambiata");
+        Log.i("EEE", "SurfaceCambiata");
 
         if (previewing) {
             camera.stopPreview();
@@ -216,14 +211,15 @@ public class MainActivity extends AppCompatActivity implements  SurfaceHolder.Ca
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        Log.i("EEE","SurfaceSistrutta");
+        Log.i("EEE", "SurfaceSistrutta");
 
         camera.stopPreview();
         camera.release();
         camera = null;
         previewing = false;
     }
-    protected void onResume(){
+
+    protected void onResume() {
         super.onResume();
     }
 
@@ -233,8 +229,8 @@ public class MainActivity extends AppCompatActivity implements  SurfaceHolder.Ca
         Canvas canvas = new Canvas(bmOverlay);
 
         float pad = 72;
-        float diffpx =TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,pad,getResources().getDisplayMetrics());
-        canvas.drawBitmap(bmp2, x, y+diffpx, new Paint());
+        float diffpx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pad, getResources().getDisplayMetrics());
+        canvas.drawBitmap(bmp2, x, y + diffpx, new Paint());
         return bmOverlay;
     }
 }

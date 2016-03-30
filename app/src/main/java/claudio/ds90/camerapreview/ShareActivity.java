@@ -27,15 +27,14 @@ public class ShareActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent i = getIntent();
-        ImageView iv = (ImageView)findViewById(R.id.shareimg);
-        Log.i("AAA",i.getStringExtra("shareImg"));
-        File imgFile = new  File(i.getStringExtra("shareImg"));
+        ImageView iv = (ImageView) findViewById(R.id.shareimg);
+        Log.i("AAA", i.getStringExtra("shareImg"));
+        File imgFile = new File(i.getStringExtra("shareImg"));
         Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getPath());
         if (iv != null) {
             iv.setImageBitmap(myBitmap);
-        }
-        else{
-            Log.i("AAA","iv è nullo");
+        } else {
+            Log.i("AAA", "iv è nullo");
         }
 
 
@@ -46,7 +45,7 @@ public class ShareActivity extends AppCompatActivity {
         sharer.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
 
-        sharer.putExtra(Intent.EXTRA_STREAM,Uri.fromFile(imgFile));
+        sharer.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imgFile));
 
     }
 

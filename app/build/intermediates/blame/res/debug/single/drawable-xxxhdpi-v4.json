@@ -40,12 +40,12 @@
         "source": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-xxxhdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
-        "merged": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png",
-        "source": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
-    },
-    {
         "merged": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4/abc_ic_star_black_16dp.png",
         "source": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-xxxhdpi-v4/abc_ic_star_black_16dp.png"
+    },
+    {
+        "merged": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png",
+        "source": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
         "merged": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4/abc_ic_clear_mtrl_alpha.png",

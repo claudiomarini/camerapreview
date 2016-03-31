@@ -28,12 +28,12 @@
         "source": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/color/switch_thumb_material_dark.xml"
     },
     {
-        "merged": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_light.xml",
-        "source": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/color/abc_primary_text_disable_only_material_light.xml"
-    },
-    {
         "merged": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",
         "source": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/color/abc_primary_text_material_light.xml"
+    },
+    {
+        "merged": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_light.xml",
+        "source": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/color/abc_primary_text_disable_only_material_light.xml"
     },
     {
         "merged": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/res/merged/debug/color/switch_thumb_material_light.xml",

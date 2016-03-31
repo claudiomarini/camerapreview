@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/res/merged/debug/menu/menumain.xml",
+        "source": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/src/main/res/menu/menumain.xml"
+    },
+    {
         "merged": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/res/merged/debug/menu/menu.xml",
         "source": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/src/main/res/menu/menu.xml"
     }

@@ -6,16 +6,24 @@
     android:gravity="bottom"
     android:weightSum="1">
 
-    <LinearLayout
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:orientation="vertical"
         android:id="@+id/alltext">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -23,8 +31,7 @@
                 android:id="@+id/iconameteo"
                 android:src="@drawable/meteo1"
                 android:layout_marginLeft="60px"
-                android:layout_gravity="left"
-                 />
+                android:layout_gravity="left" />
         </LinearLayout>
 
         <TextView
@@ -35,7 +42,7 @@
             android:textSize="50dp"
             android:layout_gravity="left"
             android:layout_marginLeft="60px"
-            android:layout_marginBottom="0dp"/>
+            android:layout_marginBottom="0dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,6 +64,7 @@
             android:layout_marginLeft="60px"
             android:layout_marginBottom="0dp"
             android:id="@+id/tmax" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,23 +87,25 @@
     </LinearLayout>
 
 
-    <ImageButton
-        android:id="@+id/flipcamera"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:text="Flip Camera"
-        android:layout_gravity="right|top"
-        android:layout_margin="10px"
-        android:background="@drawable/flipcamera" />
-    <ImageButton
-        android:id="@+id/takepicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Take Picture"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="10px"
-        android:src="@drawable/take" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
+        android:layout_gravity="center|bottom"
+        android:background="@color/colorPrimaryDark">
 
+        <ImageButton
+            android:id="@+id/takepicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Take Picture"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/take"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/colorPrimaryDark"
+            android:layout_alignParentBottom="false"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
 
 
 </LinearLayout>

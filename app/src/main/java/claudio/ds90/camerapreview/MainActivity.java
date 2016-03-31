@@ -14,10 +14,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -25,13 +30,14 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
-    Camera camera;
+    static Camera camera=null;
     SurfaceView surfaceView;
     SurfaceHolder surfaceHolder;
     boolean previewing = false;
@@ -40,11 +46,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     int currentid = Camera.CameraInfo.CAMERA_FACING_FRONT;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -62,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         this.addContentView(viewControl, layoutParamsControl);
 
 
-        ImageButton flip = (ImageButton) findViewById(R.id.flipcamera);
+        /*ImageButton flip = (ImageButton) findViewById(R.id.flipcamera);
         assert flip != null;
         flip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 camera.startPreview();
 
             }
-        });
+        });*/
 
 
         ImageButton take = (ImageButton) findViewById(R.id.takepicture);
@@ -114,13 +120,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         Matrix x = new Matrix();
                         if (currentid == Camera.CameraInfo.CAMERA_FACING_FRONT) {
                             x.postRotate(-90);
+                            x.preScale(1, -1);
                         } else {
                             x.postRotate(90);
                         }
                         Bitmap dausare = Bitmap.createBitmap(mutableBitmap, 0, 0, mutableBitmap.getWidth(), mutableBitmap.getHeight(), x, true);
 
+                       // Bitmap dausare=getResizedBitmap(dausare1,400,400);
 
                         LinearLayout lin = (LinearLayout) findViewById(R.id.alltext);
+
+                        DisplayMetrics metrics = new DisplayMetrics();
+                        getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
                         //TextView testo = (TextView)findViewById(R.id.tv_testo);
                         Bitmap testB;
@@ -132,6 +143,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
                         ImageView iv2 = new ImageView(getApplicationContext());
+                        iv2.setMinimumHeight((int) (iv2.getHeight()*metrics.density));
+                        iv2.setMinimumWidth((int) (iv2.getWidth() * metrics.density));
                         iv2.setBackgroundColor(Color.GRAY);
                         iv2.setImageBitmap(testB);
                         iv2.setDrawingCacheEnabled(true);
@@ -139,14 +152,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         BitmapDrawable drawable2 = (BitmapDrawable) iv2.getDrawable();
 
                         Rect r = drawable2.getBounds();
-                        Bitmap bitmap2 = drawable2.getBitmap();
+                        Bitmap bitmap2 = drawable2.getBitmap();//getResizedBitmap(drawable2.getBitmap(), 400,400);
 
                         Bitmap res = overlay(dausare, bitmap2, lin.getX(), lin.getY() /*testo.getX(),testo.getY()*/);
 
 
                         try {
                             FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory().toString() + "/kakakakaka.png");
-                            res.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                            res.compress(Bitmap.CompressFormat.PNG, 60, fos);
                             fos.flush();
                             fos.close();
 
@@ -168,6 +181,50 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     }
 
+    @Override
+      public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menumain, menu);
+
+        MenuItem item = menu.findItem(R.id.flipper);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                flippa(item.getActionView());return true;
+            }
+        });
+        return true;
+    }
+
+
+    public void flippa(View v){
+        if (previewing) {
+            Log.i("EEE", "in previe e la stoppo");
+            camera.stopPreview();
+        }
+
+        camera.release();
+
+        if (currentid == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            Log.i("EEE", "stava in front e la giro");
+
+            currentid = Camera.CameraInfo.CAMERA_FACING_BACK;
+            camera = Camera.open(currentid);
+            camera.setDisplayOrientation(90);
+        } else {
+            Log.i("EEE", "stava in back e la giro");
+
+            currentid = Camera.CameraInfo.CAMERA_FACING_FRONT;
+            camera = Camera.open(currentid);
+            camera.setDisplayOrientation(90);
+        }
+        Log.i("EEE", "riparte");
+        try {
+            camera.setPreviewDisplay(surfaceHolder);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        camera.startPreview();
+    }
 
     private void takePicture() {
 
@@ -181,11 +238,31 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         camera.setDisplayOrientation(90);
         Camera.Parameters params = camera.getParameters();
         //params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-        params.setFocusMode("fixed");//params.getSupportedFocusModes().get(0));
+        //params.setFocusMode("fixed");//params.getSupportedFocusModes().get(0));
 
         camera.setParameters(params);
 
 
+    }
+
+    public Bitmap getResizedBitmap(Bitmap image, int bitmapWidth, int bitmapHeight) {
+        return Bitmap.createScaledBitmap(image, bitmapWidth, bitmapHeight, true);
+    }
+
+    public Bitmap getResizedBitmap1(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+
+        return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
     @Override
@@ -223,14 +300,43 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         super.onResume();
     }
 
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
     public Bitmap overlay(Bitmap bmp1, Bitmap bmp2, float x, float y) {
 
-        Bitmap bmOverlay = Bitmap.createBitmap(bmp1);
+
+
+        float xx1 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, bmp1.getWidth(), getResources().getDisplayMetrics());
+        float yy1 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, bmp1.getHeight(), getResources().getDisplayMetrics());
+
+        Bitmap bmOverlay = Bitmap.createScaledBitmap(bmp1, (int) xx1, (int) yy1, true);
+
         Canvas canvas = new Canvas(bmOverlay);
 
-        float pad = 72;
-        float diffpx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pad, getResources().getDisplayMetrics());
-        canvas.drawBitmap(bmp2, x, y + diffpx, new Paint());
-        return bmOverlay;
+        int actionBarHeight=0;
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
+        float pad = getStatusBarHeight()+actionBarHeight+100;
+
+
+        float xx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, bmp2.getWidth(), getResources().getDisplayMetrics());
+        float yy = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, bmp2.getHeight(), getResources().getDisplayMetrics());
+        float xpad = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pad, getResources().getDisplayMetrics());
+
+        LinearLayout ll = (LinearLayout)findViewById(R.id.alltext);
+        Bitmap m = Bitmap.createScaledBitmap(bmp2, (int) xx, (int) yy,true);
+        canvas.drawBitmap(m, x, y+(int)xpad , new Paint());
+
+
+        return getResizedBitmap1(bmOverlay,1000);
     }
 }

@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/res/merged/debug/drawable/flipcameraold.png",
+        "source": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/src/main/res/drawable/flipcameraold.png"
+    },
+    {
         "merged": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_thumb_material.xml",
         "source": "/Users/claudiomarini1/Documents/prj/CameraPreview/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_seekbar_thumb_material.xml"
     },

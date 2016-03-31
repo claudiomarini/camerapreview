@@ -1612,10 +1612,11 @@ containing a value of this type.
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020049;
         public static final int abc_textfield_search_material=0x7f02004a;
         public static final int flipcamera=0x7f02004b;
-        public static final int meteo1=0x7f02004c;
-        public static final int notification_template_icon_bg=0x7f02004f;
-        public static final int sm24=0x7f02004d;
-        public static final int take=0x7f02004e;
+        public static final int flipcameraold=0x7f02004c;
+        public static final int meteo1=0x7f02004d;
+        public static final int notification_template_icon_bg=0x7f020050;
+        public static final int sm24=0x7f02004e;
+        public static final int take=0x7f02004f;
     }
     public static final class id {
         public static final int action0=0x7f0c005b;
@@ -1635,7 +1636,7 @@ containing a value of this type.
         public static final int action_mode_close_button=0x7f0c0023;
         public static final int activity_chooser_view_content=0x7f0c0024;
         public static final int alertTitle=0x7f0c0030;
-        public static final int alltext=0x7f0c0052;
+        public static final int alltext=0x7f0c0053;
         public static final int always=0x7f0c001c;
         public static final int beginning=0x7f0c0019;
         public static final int buttonPanel=0x7f0c002b;
@@ -1655,11 +1656,11 @@ containing a value of this type.
         public static final int end_padder=0x7f0c0067;
         public static final int expand_activities_button=0x7f0c0025;
         public static final int expanded_menu=0x7f0c0038;
-        public static final int flipcamera=0x7f0c0059;
+        public static final int flipper=0x7f0c0069;
         public static final int home=0x7f0c0004;
         public static final int homeAsUp=0x7f0c000d;
         public static final int icon=0x7f0c0029;
-        public static final int iconameteo=0x7f0c0053;
+        public static final int iconameteo=0x7f0c0054;
         public static final int ifRoom=0x7f0c001e;
         public static final int image=0x7f0c0026;
         public static final int info=0x7f0c0066;
@@ -1675,7 +1676,8 @@ containing a value of this type.
         public static final int none=0x7f0c000e;
         public static final int normal=0x7f0c000a;
         public static final int parentPanel=0x7f0c002d;
-        public static final int previsione=0x7f0c0055;
+        public static final int previsione=0x7f0c0056;
+        public static final int progressBar=0x7f0c0052;
         public static final int progress_circular=0x7f0c0005;
         public static final int progress_horizontal=0x7f0c0006;
         public static final int radio=0x7f0c003b;
@@ -1699,7 +1701,7 @@ containing a value of this type.
         public static final int showCustom=0x7f0c000f;
         public static final int showHome=0x7f0c0010;
         public static final int showTitle=0x7f0c0011;
-        public static final int sm24=0x7f0c0058;
+        public static final int sm24=0x7f0c0059;
         public static final int spacer=0x7f0c002c;
         public static final int split_action_bar=0x7f0c0007;
         public static final int src_atop=0x7f0c0016;
@@ -1715,10 +1717,10 @@ containing a value of this type.
         public static final int time=0x7f0c0061;
         public static final int title=0x7f0c002a;
         public static final int title_template=0x7f0c002f;
-        public static final int tmax=0x7f0c0056;
-        public static final int tmin=0x7f0c0057;
+        public static final int tmax=0x7f0c0057;
+        public static final int tmin=0x7f0c0058;
         public static final int topPanel=0x7f0c002e;
-        public static final int tv_testo=0x7f0c0054;
+        public static final int tv_testo=0x7f0c0055;
         public static final int up=0x7f0c0008;
         public static final int useLogo=0x7f0c0012;
         public static final int withText=0x7f0c0020;
@@ -1775,6 +1777,7 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int menu=0x7f0d0000;
+        public static final int menumain=0x7f0d0001;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
